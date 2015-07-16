@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	
+		<!-- 数据库连接配置 --><!--
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost/itcastoa0720</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+
+		--><!-- sql方言 -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+         <property name="show_sql">true</property>
+         
+         <property name="hbm2ddl.auto">update</property>
+         
+         <!-- 导入映射文件 -->
+         <mapping resource="cn/itcast/oa/domain/User.hbm.xml"/>
+         <mapping resource="cn/itcast/oa/domain/Role.hbm.xml"/>
+         <mapping resource="cn/itcast/oa/domain/Department.hbm.xml"/>
+         <mapping resource="cn/itcast/oa/domain/Privilege.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>
