@@ -16,6 +16,40 @@ public class User {
 	private String email;
 	private String description;
 	
+	
+	/*
+	 * 
+	 * 判断本用户是否有指定URL的权限
+	 */
+	public boolean hasPrivilegeByUrl(String url){
+		
+		//超级管理员有所有的权限
+		if(isAdmin()){
+			return true;
+		}
+		
+		//去掉后面的参数
+		int pos = url.indexOf("?");
+		if(pos>-1){
+			url = url.substring(0,pos);
+		}
+		
+		//去掉UI后缀
+		if(url.endsWith("UI")){
+			url = url.substring(0,url.length()-2);
+		}
+		
+		//普通用户要判断是否含有这个权限
+		for(Role role:roles){
+			for(Privilege priv:role.getPrivileges()){
+				if(priv.getName().equals(url)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	/*
 	 * 
 	 * 判断本用户是否有指定名称的权限

@@ -5,11 +5,28 @@
 <head>
 <title>配置权限</title>
    <%@ include file="/WEB-INF/jsp/public/common.jspf" %>
-   <script language="javascript" src="../script/jquery_treeview/jquery.treeview.js"></script>
-	<link type="text/css" rel="stylesheet" href="../style/blue/file.css" />
-	<link type="text/css" rel="stylesheet" href="../script/jquery_treeview/jquery.treeview.css" />
+   <script language="javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
 	<script type="text/javascript">
- 	//.....
+ 		$(function(){
+ 			//显示树形菜单
+ 			
+ 			
+ 			//指定事件处理函数
+ 			$("[name=privilegeIds]").click(function(){
+ 			
+ 				//当选中或者取消一个权限的时候，也同时选中或者取消所有的下级权限
+ 				$(this).siblings("ul").find("input").attr("checked",this.checked);
+ 				
+ 				//当选中一个权限的时候，也要选中所有的直接的上级权限
+ 				if(this.checked == true){
+ 					$(this).parents("li").children("input").attr("checked",true);
+ 				}
+ 				
+ 			})
+ 		})
+ 		
     </script>
 </head>
 <body>
@@ -19,7 +36,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 配置权限
+            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 配置权限
         </div>
         <div id="Title_End"></div>
     </div>
@@ -55,11 +72,36 @@
 							<td>
 							
 <!--<s:checkboxlist name="privilegeIds" list="#privilegeList" listKey="id" listValue="name"></s:checkboxlist>-->
-<s:iterator value="#privilegeList">
+<!--<s:iterator value="#privilegeList">
 	<input name="privilegeIds" id="cb_${id}" type="checkbox" value="${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/>/>
 	<label for="cb_${id}">${name}</label>
 	<br/>
+</s:iterator>-->
+<ul id="tree">
+<s:iterator value="#application.topPrivilegeList">
+	<li>
+		<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"/>
+		<label for="cb_${id}">${name}</label>
+		<ul>
+		<s:iterator value="children">
+			<li>		
+			<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"/>
+			<label for="cb_${id}">${name}</label><br/>
+			<ul>
+			<s:iterator value="children">
+				<li>
+				<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"/>
+				<label for="cb_${id}">${name}</label><br/>
+				</li>	
+			</s:iterator>
+			</ul>
+			</li>
+		</s:iterator>			
+		</ul>
+	</li>	
 </s:iterator>
+</ul>
+
 
 
 							</td>  
@@ -69,6 +111,9 @@
             </div>
         </div>
         
+        <script language="javascript">
+        $("#tree").treeview();
+        </script>
         <!-- 表单操作 -->
         <div id="InputDetailBar">
             <input type="image" src="${pageContext.request.contextPath}/style/images/save.png"/>

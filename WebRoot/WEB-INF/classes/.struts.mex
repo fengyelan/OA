@@ -1,63 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="default" location="10,10" size="280,140">
-    <action name="test" location="65,57" size="150,41">
+  <package name="default" location="10,9" size="180,71">
+    <action name="test" location="0,0" size="0,0">
       <result name="success">
         <resourceEdge source="success" routing="0" target="test.jsp" />
       </result>
     </action>
-    <action name="role_*" location="0,0" size="0,0">
-      <result name="list">
-        <resourceEdge source="list" routing="0" target="list.jsp" />
-      </result>
-      <result name="setPrivilegeUI">
-        <resourceEdge source="setPrivilegeUI" routing="0" target="setPrivilegeUI.jsp" />
-      </result>
-      <result name="saveUI">
-        <resourceEdge source="saveUI" routing="0" target="saveUI.jsp" />
-      </result>
-      <result name="toList" />
-    </action>
-    <action name="department_*" location="0,0" size="0,0">
-      <result name="list">
-        <resourceEdge source="list" routing="0" target="list.jsp" />
-      </result>
-      <result name="saveUI">
-        <resourceEdge source="saveUI" routing="0" target="saveUI.jsp" />
-      </result>
-      <result name="toList" />
-    </action>
-    <action name="user_*" location="0,0" size="0,0">
-      <result name="list">
-        <resourceEdge source="list" routing="0" target="list.jsp" />
-      </result>
-      <result name="saveUI">
-        <resourceEdge source="saveUI" routing="0" target="saveUI.jsp" />
-      </result>
-      <result name="toList" />
-      <result name="loginUI">
-        <resourceEdge source="loginUI" routing="0" target="loginUI.jsp" />
-      </result>
-      <result name="logout">
-        <resourceEdge source="logout" routing="0" target="logout.jsp" />
-      </result>
-      <result name="toIndex">
-        <resourceEdge source="toIndex" routing="0" target="index.jsp" />
-      </result>
-    </action>
   </package>
-  <webResource name="test.jsp" path="/test.jsp" location="100,205" size="150,55" />
-  <webResource name="list.jsp" path="/WEB-INF/jsp/roleAction/list.jsp" location="0,0" size="0,0" />
-  <webResource name="addUI.jsp" path="/WEB-INF/jsp/roleAction/addUI.jsp" location="0,0" size="0,0" />
-  <webResource name="editUI.jsp" path="/WEB-INF/jsp/roleAction/editUI.jsp" location="0,0" size="0,0" />
-  <webResource name="saveUI.jsp" path="/WEB-INF/jsp/roleAction/saveUI.jsp" location="0,0" size="0,0" />
-  <webResource name="list.jsp" path="/WEB-INF/jsp/departmentAction/list.jsp" location="0,0" size="0,0" />
-  <webResource name="saveUI.jsp" path="/WEB-INF/jsp/departmentAction/saveUI.jsp" location="0,0" size="0,0" />
-  <webResource name="list.jsp" path="/WEB-INF/jsp/userAction/list.jsp" location="0,0" size="0,0" />
-  <webResource name="saveUI.jsp" path="/WEB-INF/jsp/userAction/saveUI.jsp" location="0,0" size="0,0" />
-  <webResource name="setPrivilegeUI.jsp" path="/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp" location="0,0" size="0,0" />
-  <webResource name="loginUI.jsp" path="/WEB-INF/jsp/userAction/loginUI.jsp" location="0,0" size="0,0" />
-  <webResource name="logout.jsp" path="/WEB-INF/jsp/userAction/logout.jsp" location="0,0" size="0,0" />
-  <webResource name="index.jsp" path="/index.jsp" location="0,0" size="0,0" />
+  <webResource name="test.jsp" path="/test.jsp" location="0,0" size="0,0" />
 </Struts2Diagram>
 
