@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*岗位*/
-public class Role {
+public class Role implements java.io.Serializable{
 
 	private Long id;
 	private String name;

@@ -1,5 +1,6 @@
 package cn.itcast.oa.util;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,11 +26,17 @@ public class InitListener implements ServletContextListener {
 		//获取容器与相关的servlet对象
 		ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());		
 		PrivilegeService privilegeService = (PrivilegeService)ac.getBean("privilegeServiceImpl");
+		
 		// 准备数据 topPrivilegeList
 		List<Privilege> topPrivilegeList = privilegeService.findTopList();
 		sce.getServletContext().setAttribute("topPrivilegeList", topPrivilegeList);
-		System.out.println("======================已经准备数据=================");
+		System.out.println("======================已经准备数据topPrivilegeList=================");
 
+		//准备数据
+		Collection<String> allPrivilegeUrls = privilegeService.getAllPrivilegeUrls();
+		sce.getServletContext().setAttribute("allPrivilegeUrls", allPrivilegeUrls);
+		System.out.println("======================已经准备数据allPrivilegeUrls=================");
+		
 	}
 	
 	public void contextDestroyed(ServletContextEvent sce) {

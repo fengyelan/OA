@@ -3,7 +3,7 @@ package cn.itcast.oa.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Privilege {
+public class Privilege implements java.io.Serializable{
 
 	private Long id;	
 	private String url;

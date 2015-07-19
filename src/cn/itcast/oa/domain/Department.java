@@ -3,7 +3,7 @@ package cn.itcast.oa.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Department {
+public class Department implements java.io.Serializable{
 
 	private Long id;
 	private Set<User> users=new HashSet<User>();

@@ -1,9 +1,12 @@
 package cn.itcast.oa.domain;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+import com.opensymphony.xwork2.ActionContext;
+
+public class User implements java.io.Serializable{
 
 	private Long id;	
 	private Department department;
@@ -39,15 +42,22 @@ public class User {
 			url = url.substring(0,url.length()-2);
 		}
 		
-		//普通用户要判断是否含有这个权限
-		for(Role role:roles){
-			for(Privilege priv:role.getPrivileges()){
-				if(priv.getName().equals(url)){
-					return true;
+		//如果本URL不需要控制，则登录哟过户就可以使用
+		Collection<String> allPrivilegeUrls = (Collection<String>)ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+		System.out.println("<<<<<<<<<<<<<<<allPrivilegeUrls"+allPrivilegeUrls.size());
+		if(allPrivilegeUrls.contains(url)){
+			return true; 
+		}else{
+			//普通用户要判断是否含有这个权限
+			for(Role role:roles){
+				for(Privilege priv:role.getPrivileges()){
+					if(priv.getName().equals(url)){
+						return true;
+					}
 				}
 			}
+			return false;
 		}
-		return false;
 	}
 	
 	/*

@@ -12,7 +12,25 @@
    <constant name="struts.ui.theme" value="simple" />
  
     <package name="default" namespace="/" extends="struts-default">
-    	   <action name="test" class="cn.itcast.oa.test.TestAction">
+    	 
+    	   <interceptors>
+	    	   <!-- 声明拦截器 -->
+	    	   <interceptor name="checkPrivilege" class="cn.itcast.oa.util.CheckPrivilegeInterceptor"></interceptor>
+	    	   
+	    	   <!-- 重新定义默认的拦截器栈 -->
+	    	   <interceptor-stack name="defaultStack">
+	    	   		<interceptor-ref name="checkPrivilege"/>
+	    	   		<interceptor-ref name="defaultStack"/>
+	    	   </interceptor-stack>
+    	   </interceptors>
+    	   
+    	   <!-- 全局的result配置 -->
+    	   <global-results>
+    	   		<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+    	   		<result name="noPrivilege">/noPrivilege.jsp</result>
+    	   </global-results>
+    	   
+    	   <action name="test" class="testAction">
     	   		<result name="success">/test.jsp</result>
     	   </action>
     	   
@@ -37,7 +55,7 @@
     	   		<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>   	   		
     	   		<result name="toList" type="redirectAction">user_list</result>
     	   		  	   		
-    	   		<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+    	 
     	   		<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
     	   		<result name="toIndex" type="redirect">/index.jsp</result>
     	   </action>
@@ -46,6 +64,13 @@
     	   <action name="home_*" class="homeAction" method="{1}">
     	   		<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>
     	   		
+    	   </action>
+    	   
+    	   <!-- 版块管理 -->
+    	   <action name="forumManage_*" class="forumManageAction" method="{1}">
+    	   		<result name="list">/WEB-INF/jsp/forumManageAction/list.jsp</result>
+    	   		<result name="saveUI">/WEB-INF/jsp/forumManageAction/saveUI.jsp</result>   	   		
+    	   	
     	   </action>
     </package>
 

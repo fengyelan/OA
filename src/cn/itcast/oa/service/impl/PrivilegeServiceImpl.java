@@ -1,5 +1,6 @@
 package cn.itcast.oa.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,12 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements
 	public List<Privilege> findTopList() {
 		return getSession().createQuery(
 				"FROM Privilege p WHERE p.parent IS NULL").list();
+	}
+
+	public Collection<String> getAllPrivilegeUrls() {
+		System.out.println("<<<<<<<<<<<<<getAllPrivilegeUrls"+getSession().createQuery("SELECT DISTINCT p.url FROM Privilege p WHERE p.url IS NOT NULL").list().size());
+		return getSession().createQuery(
+		"SELECT DISTINCT p.url FROM Privilege p WHERE p.url IS NOT NULL").list();
 	}
 
 }
