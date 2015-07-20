@@ -1,5 +1,8 @@
 package cn.itcast.oa.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /*
  * 
  * 版块
@@ -9,7 +12,10 @@ public class Forum {
 	private Long id;
 	private String name;
 	private String description;
-	private int position;
+	private int position; // 排序用的未知号码，就是在上移和下移的时候
+	
+	
+	
 	
 	public Long getId() {
 		return id;
@@ -35,5 +41,6 @@ public class Forum {
 	public void setPosition(int position) {
 		this.position = position;
 	}
+	
 	
 }

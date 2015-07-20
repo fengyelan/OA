@@ -1,47 +1,65 @@
 package cn.itcast.oa.view.action;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionSupport;
+import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.domain.Forum;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @Controller
 @Scope("prototype")
-public class ForumManageAction extends ActionSupport {
+public class ForumManageAction extends BaseAction<Forum> {
 
 	
 	public String list() throws Exception {
 		
+		List<Forum> forumList = forumService.findAll();
+		ActionContext.getContext().put("forumList", forumList);
 		return "list";
 	}
 
 	public String delete() throws Exception {
-		
-		return "list";
+		forumService.delete(model.getId());
+		return "toList";
 	}
 
 	public String addUI() throws Exception {
-	
+		
 		return "saveUI";
 	}
 	public String add() throws Exception{
 		
+		forumService.save(model);
 		return "toList";
 	}
 	public String editUI() throws Exception {
-		
+		//准备回显的数据
+		Forum forum = forumService.getById(model.getId());
+		ActionContext.getContext().getValueStack().push(forum);
 		return "saveUI";
 	}
 	public String edit() throws Exception{
-		
+		//1.从数据库中取出原对象
+		Forum forum = forumService.getById(model.getId());
+		//2.设置要修改的属性
+		forum.setName(model.getName());
+		forum.setDescription(model.getDescription());
+		//3.更新到数据库
+		forumService.update(forum);
 		return "toList";
 	}
 	public String moveUp() throws Exception{
 		
+		forumService.moveUp(model.getId());
 		return "toList";
 	}
 	public String moveDown() throws Exception{
 		
+		forumService.moveDown(model.getId());
 		return "toList";
 	}
 	

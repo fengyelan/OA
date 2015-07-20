@@ -11,7 +11,7 @@
   		</id>
   		<property name="name"/>
   	    <property name="description"/>
-  	    <property name="position"></property>
+  	    <property name="position"/>
   	    
   </class>
 </hibernate-mapping>

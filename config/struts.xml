@@ -66,11 +66,11 @@
     	   		
     	   </action>
     	   
-    	   <!-- 版块管理 -->
+    	   <!--论坛： 版块管理 -->
     	   <action name="forumManage_*" class="forumManageAction" method="{1}">
     	   		<result name="list">/WEB-INF/jsp/forumManageAction/list.jsp</result>
     	   		<result name="saveUI">/WEB-INF/jsp/forumManageAction/saveUI.jsp</result>   	   		
-    	   	
+    	   		<result name="toList" type="redirectAction">forumManage_list</result>
     	   </action>
     </package>
 
