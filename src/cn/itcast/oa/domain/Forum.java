@@ -14,6 +14,10 @@ public class Forum {
 	private String description;
 	private int position; // 排序用的未知号码，就是在上移和下移的时候
 	
+	private Set<Topic> topics = new HashSet<Topic>();
+	private int topicCount;//文章数量
+	private int articleCount;//文章数量（主题+回复）
+	private Topic lastTopic;//最后发表的主题
 	
 	
 	
@@ -40,6 +44,30 @@ public class Forum {
 	}
 	public void setPosition(int position) {
 		this.position = position;
+	}
+	public Set<Topic> getTopics() {
+		return topics;
+	}
+	public void setTopics(Set<Topic> topics) {
+		this.topics = topics;
+	}
+	public int getTopicCount() {
+		return topicCount;
+	}
+	public void setTopicCount(int topicCount) {
+		this.topicCount = topicCount;
+	}
+	public int getArticleCount() {
+		return articleCount;
+	}
+	public void setArticleCount(int articleCount) {
+		this.articleCount = articleCount;
+	}
+	public Topic getLastTopic() {
+		return lastTopic;
+	}
+	public void setLastTopic(Topic lastTopic) {
+		this.lastTopic = lastTopic;
 	}
 	
 	

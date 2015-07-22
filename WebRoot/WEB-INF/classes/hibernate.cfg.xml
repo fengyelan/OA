@@ -24,5 +24,8 @@
          <mapping resource="cn/itcast/oa/domain/Department.hbm.xml"/>
          <mapping resource="cn/itcast/oa/domain/Privilege.hbm.xml"/>
          <mapping resource="cn/itcast/oa/domain/Forum.hbm.xml"/>
+         <mapping resource="cn/itcast/oa/domain/Topic.hbm.xml"/>
+         <mapping resource="cn/itcast/oa/domain/Reply.hbm.xml"/>
+         
 	</session-factory>
 </hibernate-configuration>

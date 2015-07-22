@@ -4,12 +4,16 @@ import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
 
+import cn.itcast.oa.domain.User;
 import cn.itcast.oa.service.DepartmentService;
 import cn.itcast.oa.service.ForumService;
 import cn.itcast.oa.service.PrivilegeService;
+import cn.itcast.oa.service.ReplyService;
 import cn.itcast.oa.service.RoleService;
+import cn.itcast.oa.service.TopicService;
 import cn.itcast.oa.service.UserService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -35,6 +39,14 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 		return model;
 	}
 	
+	/*
+	 * 
+	 * 获取当前用户
+	 */
+	public User getCurrentUser(){
+		return (User)ActionContext.getContext().getSession().get("user");
+	}
+	
 	//==========service的实例的声明===========
 	@Resource
 	protected RoleService roleService;
@@ -50,5 +62,11 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	
 	@Resource
 	protected ForumService forumService;
+	
+	@Resource
+	protected TopicService topicService;
+	
+	@Resource
+	protected ReplyService replyService;
 
 }

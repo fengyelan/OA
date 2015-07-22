@@ -37,7 +37,7 @@
                         </td>
                     </tr>
                     <tr><td>登录名</td>
-                        <td><s:textfield type="text" name="loginName" cssClass="InputStyle"/> *
+                        <td><s:textfield name="loginName" cssClass="InputStyle"/> *
 							（登录名要唯一）
 						</td>
                     </tr>
