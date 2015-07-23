@@ -30,12 +30,12 @@ public class InitListener implements ServletContextListener {
 		// 准备数据 topPrivilegeList
 		List<Privilege> topPrivilegeList = privilegeService.findTopList();
 		sce.getServletContext().setAttribute("topPrivilegeList", topPrivilegeList);
-		System.out.println("======================已经准备数据topPrivilegeList=================");
+		//System.out.println("======================已经准备数据topPrivilegeList=================");
 
 		//准备数据
 		Collection<String> allPrivilegeUrls = privilegeService.getAllPrivilegeUrls();
 		sce.getServletContext().setAttribute("allPrivilegeUrls", allPrivilegeUrls);
-		System.out.println("======================已经准备数据allPrivilegeUrls=================");
+		//System.out.println("======================已经准备数据allPrivilegeUrls=================");
 		
 	}
 	

@@ -36,7 +36,6 @@ public class DepartmentServiceImpl extends DaoSupportImpl<Department> implements
 
 	
 	public List<Department> findTopList() {
-		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().createQuery(//
 		"FROM Department d WHERE d.parent IS NULL")//
 		.list();

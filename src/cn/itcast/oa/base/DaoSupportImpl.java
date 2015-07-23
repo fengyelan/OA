@@ -1,18 +1,17 @@
 package cn.itcast.oa.base;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
+import cn.itcast.oa.domain.PageBean;
 
 @Transactional
 @SuppressWarnings("unchecked")
@@ -81,6 +80,35 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 					.setParameterList("ids", ids)//
 					.list();
 		}
+	}
+	
+	/*
+	 * 
+	 * 公共的查询分页信息的方法
+	 * HQL:"FROM Reply r WHERE r.topic=? ORDER BY r.postTime"
+	 */
+	public PageBean getPageBean(int currentPage, int pageSize, String HQL,
+			List<Object> paras) {
+		//查询列表
+		Query q = getSession().createQuery(HQL);
+		if(paras!=null){
+			for(int i=0;i<paras.size();i++){
+				q.setParameter(i, paras.get(i));
+			}
+		}
+		q.setFirstResult((currentPage-1)*pageSize);
+		q.setMaxResults(pageSize);
+		List list =q.list();
+		
+		//查询总数量
+		Query qCount = getSession().createQuery("SELECT COUNT(*) "+HQL);
+		if(paras!=null){
+			for(int i=0;i<paras.size();i++){
+				qCount.setParameter(i, paras.get(i));
+			}
+		}
+		Long count =(Long)qCount.uniqueResult();
+		return new PageBean(currentPage, pageSize,count.intValue() , list);
 	}
 
 	

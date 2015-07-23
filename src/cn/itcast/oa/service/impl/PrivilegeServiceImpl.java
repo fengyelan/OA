@@ -22,7 +22,6 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements
 	}
 
 	public Collection<String> getAllPrivilegeUrls() {
-		System.out.println("<<<<<<<<<<<<<getAllPrivilegeUrls"+getSession().createQuery("SELECT DISTINCT p.url FROM Privilege p WHERE p.url IS NOT NULL").list().size());
 		return getSession().createQuery(
 		"SELECT DISTINCT p.url FROM Privilege p WHERE p.url IS NOT NULL").list();
 	}

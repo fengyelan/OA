@@ -18,7 +18,7 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
 		String nameSpace = invocation.getProxy().getNamespace();
 		String actionName = invocation.getProxy().getActionName();
 		String privUrl = nameSpace+actionName;
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<privUrl"+privUrl);
+		
 		
 		//如果没有登录，就要转到登录页面
 		//如果已经登录，就判断权限
@@ -38,7 +38,7 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
 			if(user.hasPrivilegeByUrl(privUrl)||privUrl.startsWith("/home")){
 				return invocation.invoke();
 			}else{
-				System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<"+user.getName());
+				
 				ActionContext.getContext().getSession().remove("user");
 				return "noPrivilege";
 			}

@@ -2,6 +2,9 @@ package cn.itcast.oa.base;
 
 import java.util.List;
 
+import cn.itcast.oa.domain.PageBean;
+import cn.itcast.oa.domain.Topic;
+
 public interface DaoSupport<T> {
 
 	/*
@@ -31,4 +34,12 @@ public interface DaoSupport<T> {
 	 * 按照id查询
      */
 	List<T> getByIds(Long[] ids);
+	
+	/*
+	 * 
+	 * 查询分页信息
+	 * HQL:用于进行查询的HQL语句
+	 * paras：参数列表，和HQL里面的参数列表一一对应
+	 */
+	PageBean getPageBean(int currentPage, int pageSize, String HQL,List<Object> paras);
 }

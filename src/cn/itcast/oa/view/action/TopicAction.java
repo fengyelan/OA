@@ -2,6 +2,7 @@ package cn.itcast.oa.view.action;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -10,16 +11,27 @@ import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Forum;
-import cn.itcast.oa.domain.Reply;
+import cn.itcast.oa.domain.PageBean;
 import cn.itcast.oa.domain.Topic;
 
 import com.opensymphony.xwork2.ActionContext;
+
 @Controller
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
 	
 	private Long forumId;
 
+	protected int currentPage=1;
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	protected int pageSize = 10;
 
 
 	/*
@@ -28,14 +40,19 @@ public class TopicAction extends BaseAction<Topic> {
 	public String show() throws Exception{
 		
 		//准备数据，topic
-		System.out.println(model.getId()+"<<<<<<<<<<<<<<<<<<<<<<,");
 		Topic topic = topicService.getById(model.getId());
 		ActionContext.getContext().put("topic", topic);
 		
-		//准备数据 replyList
-		List<Reply> replyList = replyService.findByTopic(topic);
-		ActionContext.getContext().put("replyList", replyList);
+//		//准备数据 replyList
+//		List<Reply> replyList = replyService.findByTopic(topic);
+//		ActionContext.getContext().put("replyList", replyList);
 		
+		//准备数据,分页数据
+		String hql="FROM Reply r WHERE r.topic=? ORDER BY r.postTime ASC";
+		List<Object> list = new ArrayList<Object>();
+		list.add(topic);
+		PageBean pageBean = replyService.getPageBean(currentPage,pageSize,hql,list);
+		ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
 	} 
 	
@@ -55,7 +72,6 @@ public class TopicAction extends BaseAction<Topic> {
 	public String add() throws Exception{
 		
 		//封装
-		Topic topic = new Topic();
 
 		model.setForum(forumService.getById(forumId));
 		
